@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Query Data</title>
+
+    <!-- Configure dojo for asynchronous module loading -->
+    <script>
+        var dojoConfig = {
+            async: true
+        };
+    </script>
+
+    <link rel="stylesheet" href="http://js.arcgis.com/3.39/dijit/themes/claro/claro.css">
+    <link rel="stylesheet" href="http://js.arcgis.com/3.39/esri/css/esri.css">
+    <link rel="stylesheet" href="css/querydata.css"/>
+    
+    <script src="http://js.arcgis.com/3.39/"></script>
+    <script src="js/map.js"></script>
+</head>
+
+<body class="claro">
+<div id="bcMain" data-dojo-type="dijit/layout/BorderContainer"
+     data-dojo-props="design:'headline', liveSplitters:'true'">
+    <div id="cpCenter" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center'">
+        <div id="divMap"></div>
+        <div id="divRenderer">
+        </div>
+    </div>
+    <div id="cpBottom" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="splitter:'true', region:'bottom'">
+        <div id="divGrid"></div>
+    </div>
+</div>
+</body>
+</html>
