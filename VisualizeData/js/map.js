@@ -4,35 +4,44 @@ require([
     "esri/layers/ArcGISDynamicMapServiceLayer",
     "esri/layers/FeatureLayer",
 
-
     "esri/symbols/SimpleFillSymbol",
     "esri/symbols/SimpleLineSymbol",
     "esri/symbols/SimpleMarkerSymbol",
     "esri/Color",
 
+    "esri/dijit/PopupTemplate",
+
     "esri/renderers/ClassBreaksRenderer",
     "esri/renderers/SimpleRenderer",
     "esri/layers/LayerDrawingOptions",
 
-        "dojo/ready",
-        "dojo/parser",
-        "dojo/on",
-        "dojo/dom",
+    "dojo/ready",
+    "dojo/parser",
+    "dojo/on",
+    "dojo/dom",
 
 
-        "dojo/_base/declare",
-        "dojo/_base/array",
+    "dojo/_base/declare",
+    "dojo/_base/array",
 
-        "dijit/layout/BorderContainer",
-        "dijit/layout/ContentPane",
-        "dijit/form/Button"],
-    function (Map, ArcGISDynamicMapServiceLayer, FeatureLayer,
+    "dijit/layout/BorderContainer",
+    "dijit/layout/ContentPane",
+    "dijit/form/Button"],
+    function (
+        Map, ArcGISDynamicMapServiceLayer, FeatureLayer,
+
         SimpleFillSymbol, SimpleLineSymbol, SimpleMarkerSymbol, Color,
-        ClassBreaksRenderer,SimpleRenderer, LayerDrawingOptions,
-              ready, parser, on, dom,
-              declare, array,
-              BorderContainer, ContentPane, Button) {
-// @formatter:on
+
+        PopupTemplate,
+
+        ClassBreaksRenderer, SimpleRenderer, LayerDrawingOptions,
+        
+        ready, parser, on, dom,
+        
+        declare, array,
+
+        BorderContainer, ContentPane, Button) {
+        // @formatter:on
 
         // Wait until DOM is ready *and* all outstanding require() calls have been resolved
         ready(function () {
@@ -51,7 +60,7 @@ require([
                 center: [-119.65, 36.87],
                 zoom: 4
             });
-           
+
 
             // Construct and wire a button to apply the renderer
             mapMain.on('layers-add-result', changeQuakesRenderer);
@@ -63,12 +72,21 @@ require([
             });
             lyrUSA.setVisibleLayers([0, 1, 3]);
 
+            var content = new PopupTemplate({
+                title: "Magnitud terremoto: {MAGNITUDE}",
+                description: "En {PLACE}"
+            });
+            
+
             // Construct the Quakes layer
             var outFieldsQuakes = ["EQID", "UTC_DATETIME", "MAGNITUDE", "PLACE"];
 
             var lyrQuakes = new FeatureLayer(sUrlQuakesLayer, {
-                outFields: outFieldsQuakes
+                outFields: outFieldsQuakes,
+                infoTemplate: content
             });
+
+           
 
             lyrQuakes.setDefinitionExpression("MAGNITUDE >= 2.0");
 
@@ -111,7 +129,7 @@ require([
                 var symDefault = new SimpleFillSymbol().setColor(new Color([255, 255, 0]));
 
                 // Step: Construct a class breaks renderer
-                 var cbrCountyPopDensity = new ClassBreaksRenderer(symDefault, 'pop00_sqmi');
+                var cbrCountyPopDensity = new ClassBreaksRenderer(symDefault, 'pop00_sqmi');
 
                 //Step: Define the class breaks
                 cbrCountyPopDensity.addBreak({
