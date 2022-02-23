@@ -10,7 +10,10 @@ require([
     "esri/symbols/SimpleMarkerSymbol",
     "esri/Color",
 
+    "esri/renderers/ClassBreaksRenderer",
     "esri/renderers/SimpleRenderer",
+    "esri/layers/LayerDrawingOptions",
+
         "dojo/ready",
         "dojo/parser",
         "dojo/on",
@@ -25,7 +28,7 @@ require([
         "dijit/form/Button"],
     function (Map, ArcGISDynamicMapServiceLayer, FeatureLayer,
         SimpleFillSymbol, SimpleLineSymbol, SimpleMarkerSymbol, Color,
-        SimpleRenderer,
+        ClassBreaksRenderer,SimpleRenderer, LayerDrawingOptions,
               ready, parser, on, dom,
               declare, array,
               BorderContainer, ContentPane, Button) {
@@ -98,34 +101,19 @@ require([
                     maxDataValue: 9
                 }]);
             }
+            // Evento click botón 
+            on(dom.byId('progButtonNode'), 'click', changeCountiesRenderer);
 
-
+            // Función que cambia el renderer de los condados
             function changeCountiesRenderer() {
-
+                console.log('changeCountiesRenderer')
+                // Simbología por defecto
                 var symDefault = new SimpleFillSymbol().setColor(new Color([255, 255, 0]));
 
                 // Step: Construct a class breaks renderer
-                 
-
+                 var cbrCountyPopDensity = new ClassBreaksRenderer(symDefault, 'pop00_sqmi');
 
                 //Step: Define the class breaks
-                
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 cbrCountyPopDensity.addBreak({
                     minValue: 0,
                     maxValue: 10,
@@ -152,9 +140,14 @@ require([
                     symbol: new SimpleFillSymbol().setColor(new Color([179, 0, 0]))
                 });
 
-
                 // Step: Apply the renderer to the Counties layer
+                var arrayStyle = [];
+                var drawing = new LayerDrawingOptions();
+                drawing.renderer = cbrCountyPopDensity;
 
+                arrayStyle[3] = drawing;
+                // lyrUSA = MapServer 
+                lyrUSA.setLayerDrawingOptions(arrayStyle);
 
             }
 
