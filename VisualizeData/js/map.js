@@ -97,7 +97,6 @@ require([
                     minDataValue: 0,
                     maxDataValue: 9
                 }]);
-
             }
 
 
@@ -105,19 +104,56 @@ require([
 
                 var symDefault = new SimpleFillSymbol().setColor(new Color([255, 255, 0]));
 
-                /*
-                 * Step: Construct a class breaks renderer
-                 */
+                // Step: Construct a class breaks renderer
+                 
 
 
-                /*
-                 * Step: Define the class breaks
-                 */
+                //Step: Define the class breaks
+                
 
 
-                /*
-                 * Step: Apply the renderer to the Counties layer
-                 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                cbrCountyPopDensity.addBreak({
+                    minValue: 0,
+                    maxValue: 10,
+                    symbol: new SimpleFillSymbol().setColor(new Color([254, 240, 217]))
+                });
+                cbrCountyPopDensity.addBreak({
+                    minValue: 10,
+                    maxValue: 100,
+                    symbol: new SimpleFillSymbol().setColor(new Color([253, 204, 138]))
+                });
+                cbrCountyPopDensity.addBreak({
+                    minValue: 100,
+                    maxValue: 1000,
+                    symbol: new SimpleFillSymbol().setColor(new Color([252, 141, 89]))
+                });
+                cbrCountyPopDensity.addBreak({
+                    minValue: 1000,
+                    maxValue: 10000,
+                    symbol: new SimpleFillSymbol().setColor(new Color([227, 74, 51]))
+                });
+                cbrCountyPopDensity.addBreak({
+                    minValue: 10000,
+                    maxValue: 100000,
+                    symbol: new SimpleFillSymbol().setColor(new Color([179, 0, 0]))
+                });
+
+
+                // Step: Apply the renderer to the Counties layer
 
 
             }
