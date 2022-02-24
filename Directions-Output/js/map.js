@@ -27,12 +27,17 @@ require([
             });
 
             //Step: Add the Directions widget
-            var dijitDirections = new Directions({
-                map: mapMain,
-                routeTaskUrl: "http://utility.arcgis.com/usrsvcs/appservices/OM1GNiiACNJceMRn/rest/services/World/Route/NAServer/Route_World"
-
-            }, "divDirections");
+            var dijitDirections = new Directions(
+                {
+                    map: mapMain,
+                    routeTaskUrl: "http://utility.arcgis.com/usrsvcs/appservices/OM1GNiiACNJceMRn/rest/services/World/Route/NAServer/Route_World"
+                }, 
+                "divDirections"
+            );
             dijitDirections.startup();
+
+
+            // dijitDirections.setDirectionsLanguage("es")
 
         });
     });
